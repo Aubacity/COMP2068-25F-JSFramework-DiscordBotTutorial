@@ -4,7 +4,9 @@
 import { Client, GatewayIntentBits } from 'discord.js';
 import dotenv from 'dotenv';
 
+// File system module
 const fs = require('fs');
+// Path module
 const path = require('path');
 
 // Step 2: Import all command handlers
