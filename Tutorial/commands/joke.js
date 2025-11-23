@@ -1,5 +1,5 @@
 
-// Step 1: Import fs module for file operations
+// Step 1: Import node-fetch for HTTP requests
 const fetch = require('node-fetch');
 
 // https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,racist,sexist,explicit
@@ -11,7 +11,7 @@ const JOKE_API_URL = 'https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsf
 // Step 3: Export the command handler function
 module.exports = async (message) => {
     try {
-        // Step 4: Send a "typing" indicator while fecthing the joke (simulates real-time typing)
+        // Step 4: Send a "typing" indicator while fetching the joke (simulates real-time typing)
         message.channel.sendTyping();
 
         // Step 5: Make HTTP GET request to JokeAPI

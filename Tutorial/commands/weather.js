@@ -16,7 +16,7 @@ module.exports = async (message, args) => {
 
     try {
         // Step 5: Send a "typing" indicator while fetching weather data
-        await message.channel.sendTypeing();
+        await message.channel.sendTyping();
 
         // Step 6: Get WeatherAPI key from environment variable
         const apiKey = process.env.WEATHER_API_KEY;
@@ -64,23 +64,23 @@ module.exports = async (message, args) => {
         const tempC = data.current.temp_c;
         const tempF = data.current.temp_f;
         const condition = data.current.condition.text;
-        const feelsLikeC = data.current.feelslie_c;
+        const feelsLikeC = data.current.feelslike_c;
         const feelsLikeF = data.current.feelslike_f;
         const humidity = data.current.humidity;
         const windKph = data.current.wind_kph;
         const windMph = data.current.wind_mph;
         const windDir = data.current.wind_dir;
 
-        // Step 12: Build theweather message report
+        // Step 12: Build the weather message report
         let weatherMessage = `**Weather for ${locationName}`;
 
-        // Add region and counry if available
+        // Add region and country if available
         if (region) {
             weatherMessage += `, ${region}`;
         }
         weatherMessage += `, ${country}**\n`;
 
-        // Tempurature
+        // Temperature
         weatherMessage += `Temperature: ${tempC}°C (${tempF}°F)\n`;
 
         // Condition
@@ -104,7 +104,7 @@ module.exports = async (message, args) => {
 
         // Send user-friendly error message
         if (error.message.includes('API key')) {
-            // API ley issue - notify admin/developer
+            // API key issue - notify admin/developer
             await message.reply('There is a problem with the Weather API key. Please contact the bot administrator.');
         } else {
             // General error

@@ -30,8 +30,8 @@ module.exports = async (message, args, users, usersFile) => {
 
     // Step 6: Bot random selection of choices
     const choices = ['rock', 'paper', 'scissors'];
-    const randomChoice = choices[Math.floor(Math.random() * choices.length)];
-    const botChoice = choices[randomChoice];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    const botChoice = choices[randomIndex];
 
     // Step 7: Determine whom won
     // Rock < Paper < Scissors < Rock
@@ -78,7 +78,7 @@ module.exports = async (message, args, users, usersFile) => {
         users[userId].games.rps.ties++;
     }
 
-    // Step 10: Save updated stats to usres.json
+    // Step 10: Save updated stats to users.json
     try {
         fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
     } catch (error) {
@@ -90,7 +90,7 @@ module.exports = async (message, args, users, usersFile) => {
     // Step 11: Send game result to Discord channel
     await message.reply(
         `**Rock Paper Scissors!**\n` +
-        `Your choice: **${userChoice}** againt my choice: **${botChoice}**\n` +
+        `Your choice: **${userChoice}** against my choice: **${botChoice}**\n` +
         `**${result}**`
     )
 }

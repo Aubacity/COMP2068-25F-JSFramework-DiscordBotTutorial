@@ -1,1 +1,26 @@
-{}
+{
+  "93377261645856768": {
+    "userId": "93377261645856768",
+    "username": "aubacity",
+    "authenticated": true,
+    "games": {
+      "rps": {
+        "wins": 1,
+        "losses": 2,
+        "ties": 0
+      }
+    }
+  },
+  "685507245777354877": {
+    "userId": "685507245777354877",
+    "username": "kevinkuntz",
+    "authenticated": true,
+    "games": {
+      "rps": {
+        "wins": 0,
+        "losses": 0,
+        "ties": 0
+      }
+    }
+  }
+}

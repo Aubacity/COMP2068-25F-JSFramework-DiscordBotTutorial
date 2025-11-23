@@ -12,7 +12,7 @@ module.exports = async (message, users) => {
     }
 
     // Step 4: Get user's data from the users object
-    const userData = users[usersId];
+    const userData = users[userID];
     const username = userData.username || message.author.username;
 
     // Step 5: Check if user has any game statistics
@@ -29,7 +29,7 @@ module.exports = async (message, users) => {
 
     // RPS stats
     if (userData.games.rps) {
-        const rpsStats = userData.games/rps;
+        const rpsStats = userData.games.rps;
         const wins = rpsStats.wins || 0;
         const losses = rpsStats.losses || 0;
         const ties = rpsStats.ties || 0;

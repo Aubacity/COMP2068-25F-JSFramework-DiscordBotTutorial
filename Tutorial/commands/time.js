@@ -31,10 +31,10 @@ module.exports = async (message, args) => {
         if (!isNaN(numValue) && numValue.toString() === arg.replace('+', '')) {
             utcOffset = numValue;
         }
-        // Check if its a valid format type (case-sensitive)
+        // Check if its a valid format type
         else if (arg === 't' || arg === 'T' || arg === 'd' || arg === 'D' || arg === 'f' || arg === 'F' || arg === 'R') {
-            // Preserve exact case for format type
-            formatType = arg === 'R' ? 'r' : arg;
+            // Preserve exact case for format type (Case-sensitive, except 'R' if lower then move to upper)
+            formatType = arg === 'r' ? 'R' : arg;
         }
 
     };
@@ -59,7 +59,7 @@ module.exports = async (message, args) => {
 
     response += `Time: ${formattedTime}\n`;
 
-    // Step 8: Send the formmated time to the channel
+    // Step 8: Send the formatted time to the channel
     await message.reply(response);
 
 };

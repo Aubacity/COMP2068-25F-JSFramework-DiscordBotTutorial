@@ -3,7 +3,7 @@
 const fs = require('fs');
 
 // Step 2: Export the command handler function
-module.exports = async (message, UserSelectMenuBuilder, usersFile) => {
+module.exports = async (message, users, usersFile) => {
 
     // Step 3  : Get the user's unique Discord ID (snowflake)
     const userId = message.author.id;
@@ -12,7 +12,7 @@ module.exports = async (message, UserSelectMenuBuilder, usersFile) => {
     const username = message.author.username;
 
     // Step 5  : Check if user already exists in database
-    if (user[userId]) {
+    if (users[userId]) {
 
         // Step 5.1: User has greeted before/Is already authenticated
         if (users[userId].authenticated) {
@@ -33,7 +33,7 @@ module.exports = async (message, UserSelectMenuBuilder, usersFile) => {
         }
     }
     else {
-        // Step 6: New user - Cerate profile and authenticate
+        // Step 6: New user - Create profile and authenticate
         users[userId] = {
             userId: userId,
             username: username,
@@ -55,13 +55,12 @@ module.exports = async (message, UserSelectMenuBuilder, usersFile) => {
 
         //  Step 8: Send welcome message with instructions
         await message.reply(
-            `Hello, ${username}! You have been authenticated to AubacityBot. ` +
-            `Accessable commands:\n` +
-            `!time [UTC] [Type] - Get current time info\n` +
+            `Hello, ${username}! You have been authenticated to AubacityBot. Accessible commands:\n` +
+            `!time [UTC|Type] - Get current time info\n` +
             `!joke - Get a random programming joke\n` +
             `!rps [rock|paper|scissors] - Play Rock-Paper-Scissors game\n` +
             `!score - View your game stats\n` +
-            `!weather [location] - Get current weather info`
+            `!weather [location] - Get current weather info, use commas to specify more strictly`
         );
     } catch (error) {
         // Step 9: Error Handle if file write fails
