@@ -17,6 +17,7 @@ module.exports = async (message, users, usersFile) => {
         // Step 5.1: User has greeted before/Is already authenticated
         if (users[userId].authenticated) {
             await message.reply(`Welcome back, ${username}! You are already authenticated.`);
+            return; // Exit early - user already authenticated
         } else {
             // Step 5.2 User exits but hasn't authenticated (Should not happen but handle it just in case)
             users[userId].authenticated = true;
@@ -26,9 +27,11 @@ module.exports = async (message, users, usersFile) => {
             try {
                 fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
                 await message.reply(`Hello, ${username}! You have been authenticated successfully.`);
+                return; // Exit after successful authentication
             } catch (error) {
                 console.error('Error writing to users file:', error);
                 await message.reply('There was an error authenticating you. Please try again later.');
+                return; // Exit after error
             }
         }
     }
