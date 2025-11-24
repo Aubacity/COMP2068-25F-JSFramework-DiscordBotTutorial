@@ -9,6 +9,8 @@ require('dotenv').config();
 const fs = require('fs');
 // Path module
 const path = require('path');
+// HTTP module for Render.com health checks
+const http = require('http');
 
 // Step 2: Import all command handlers
 const handleHello = require('./commands/hello');
@@ -142,5 +144,25 @@ process.on('unhandledRejection', (error) => {
     console.error('Unhandled promise rejection:', error);
 });
 
-// Step 9: Login to Discord using the bot token
+// Step 9: Create HTTP server for Render.com (required for web services)
+const PORT = process.env.PORT || 3000;
+const server = http.createServer((req, res) => {
+    if (req.url === '/health' || req.url === '/') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ 
+            status: 'ok', 
+            bot: client.user ? client.user.tag : 'connecting...',
+            uptime: process.uptime()
+        }));
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not Found');
+    }
+});
+
+server.listen(PORT, () => {
+    console.log(`HTTP server listening on port ${PORT}`);
+});
+
+// Step 10: Login to Discord using the bot token
 client.login(process.env.DISCORD_TOKEN);
